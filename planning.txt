@@ -1,0 +1,64 @@
+#What I want a tool to look like
+
+##Interactive HTML Tool
+##Have code for a SIR model
+##Have people be able to set a population size, beta, and recovery rate
+##Have people be able to modify those and compare original versus changes
+##Have a plot to demonstrate each of those
+
+##If time could have it demonstrate total epidemic size (total infecteds)
+##If time could have it demonstrate max number of infecteds
+
+##deployable on github pages
+##static HTML with javascript or other embedded code
+
+
+##Draft prompt
+
+Let's make a plan to create an interactive tool which could be hosted on github pages.
+The tool should use static HTML with jacascript or other embedded code.
+I want the tool to demonstrate SIR plots. 
+I want the user to be able to set the population size, initial number of infected perssons, infection rate, and recovery rate.
+I want the user to be able to modify the infection rate and recovery rate by a proportion and demonstrate the change in side by side plots.
+What other information is needed to build this code?
+
+The time horizon should be user-adjsutable but max out at 365 days.
+The time step should be user-adjsutable from 0.01 to 1 days
+Initial recovered popualtion should be user-configuarable.
+S0 = population - infected0 - recovered0 is acceptable.
+A simple deterministic SIR model using differential equations.
+infection rate = beta
+recovery rate = gamma
+proportions are entered as decimal values
+beta_new = beta * proportion
+gamma_new = 1/(duration of infection*proportion)
+proportion should range between 0 and 1
+proportion should be separate for beta and gamma
+user can comapre one modified scenario against baseline
+plots should show full S, I, R curves in both plots
+use Chart.js for plot library
+plot should have different color for each compartment with legend
+x-axis = time in days
+y-axis = people 
+add summary value of total number of infected people during time horizon
+add summary value of number infected at peak day
+have paramaters be input as number fields
+have prorpotions be a slider scale
+Should the chart update live as inputs change
+have a reset to defaults
+prevent rates from being negative
+flag infected greater than population or set to 0
+ignore educational context
+use separate index.html, style.css, script.js
+What else is needed?
+
+
+1. user should input duration of infection
+2. gamma = 1 / duration and gamma_new = 1/duration*proportion
+3. yes, “total number infected” means cumulative infected = N - S_end?
+4. When I0 + R0 > N, should we block with validation
+5. default values: n=100 i0=1 r0=0 beta=.5 duration of infection=7 beta_prop = 1 duration infection_prop=1 time horizon = 100 days tim step = 1
+6. slider setp of 0.01
+7. proportions only allow reductions (0 to 1) 
+8. sure, show day of peak infection too
+Turn my requirements into a complete spec and then generate the actual index.html, style.css, and script.js.

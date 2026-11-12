@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIR Model Comparison Tool</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <main class="page">
+      <header class="page-header">
+        <div>
+          <h1>SIR Model Comparison Tool</h1>
+          <p class="subtitle">
+            Compare a baseline SIR simulation to a modified scenario with reduced
+            infection and recovery rates.
+          </p>
+        </div>
+        <button id="reset-button" class="secondary-button" type="button">
+          Reset to defaults
+        </button>
+      </header>
+
+      <section class="controls-card" aria-labelledby="controls-heading">
+        <h2 id="controls-heading">Model inputs</h2>
+        <form id="controls-form" novalidate>
+          <div class="controls-grid">
+            <label class="field">
+              <span>Population size (N)</span>
+              <input id="population" name="population" type="number" min="1" step="1" inputmode="numeric" />
+            </label>
+
+            <label class="field">
+              <span>Initial infected (I₀)</span>
+              <input id="initial-infected" name="initialInfected" type="number" min="0" step="1" inputmode="numeric" />
+            </label>
+
+            <label class="field">
+              <span>Initial recovered (R₀)</span>
+              <input id="initial-recovered" name="initialRecovered" type="number" min="0" step="1" inputmode="numeric" />
+            </label>
+
+            <label class="field">
+              <span>Infection rate (β)</span>
+              <input id="beta" name="beta" type="number" min="0" step="0.01" inputmode="decimal" />
+            </label>
+
+            <label class="field">
+              <span>Duration of infection (days)</span>
+              <input id="duration" name="duration" type="number" min="0.01" step="0.01" inputmode="decimal" />
+            </label>
+
+            <label class="field">
+              <span>Time horizon (days)</span>
+              <input id="time-horizon" name="timeHorizon" type="number" min="0.01" max="365" step="1" inputmode="decimal" />
+            </label>
+
+            <label class="field">
+              <span>Time step (days)</span>
+              <input id="time-step" name="timeStep" type="number" min="0.01" max="1" step="0.01" inputmode="decimal" />
+            </label>
+          </div>
+
+          <div class="slider-grid">
+            <label class="field slider-field" for="beta-proportion">
+              <span>
+                Infection-rate proportion
+                <strong id="beta-proportion-value">1.00</strong>
+              </span>
+              <input id="beta-proportion" name="betaProportion" type="range" min="0" max="1" step="0.01" />
+            </label>
+
+            <label class="field slider-field" for="gamma-proportion">
+              <span>
+                Recovery-rate proportion
+                <strong id="gamma-proportion-value">1.00</strong>
+              </span>
+              <input id="gamma-proportion" name="gammaProportion" type="range" min="0" max="1" step="0.01" />
+            </label>
+          </div>
+        </form>
+
+        <section class="derived-values" aria-labelledby="derived-heading">
+          <h3 id="derived-heading">Scenario parameters</h3>
+          <div class="derived-grid">
+            <div class="derived-card">
+              <h4>Baseline</h4>
+              <dl>
+                <div>
+                  <dt>Susceptible at start</dt>
+                  <dd id="baseline-s0">—</dd>
+                </div>
+                <div>
+                  <dt>β</dt>
+                  <dd id="baseline-beta">—</dd>
+                </div>
+                <div>
+                  <dt>γ = 1 / duration</dt>
+                  <dd id="baseline-gamma">—</dd>
+                </div>
+              </dl>
+            </div>
+            <div class="derived-card">
+              <h4>Modified</h4>
+              <dl>
+                <div>
+                  <dt>β<sub>new</sub> = β × proportion</dt>
+                  <dd id="modified-beta">—</dd>
+                </div>
+                <div>
+                  <dt>γ<sub>new</sub> = γ × proportion</dt>
+                  <dd id="modified-gamma">—</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <div id="validation-message" class="validation-message" role="alert" aria-live="polite"></div>
+      </section>
+
+      <section class="charts-grid" aria-label="Simulation comparison charts">
+        <article class="chart-card">
+          <div class="chart-header">
+            <h2>Baseline scenario</h2>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="baseline-chart"></canvas>
+          </div>
+          <div class="summary-grid" id="baseline-summary"></div>
+        </article>
+
+        <article class="chart-card">
+          <div class="chart-header">
+            <h2>Modified scenario</h2>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="modified-chart"></canvas>
+          </div>
+          <div class="summary-grid" id="modified-summary"></div>
+        </article>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
