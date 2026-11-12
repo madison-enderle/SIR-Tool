@@ -13,8 +13,8 @@
         <div>
           <h1>SIR Model Comparison Tool</h1>
           <p class="subtitle">
-            Compare a baseline SIR simulation to a modified scenario with reduced
-            infection and recovery rates.
+            Compare a baseline SIR simulation to a modified scenario with
+            adjusted infection and recovery parameters.
           </p>
         </div>
         <button id="reset-button" class="secondary-button" type="button">
@@ -73,10 +73,10 @@
 
             <label class="field slider-field" for="gamma-proportion">
               <span>
-                Recovery-rate proportion
+                Recovery-duration proportion
                 <strong id="gamma-proportion-value">1.00</strong>
               </span>
-              <input id="gamma-proportion" name="gammaProportion" type="range" min="0" max="1" step="0.01" />
+              <input id="gamma-proportion" name="gammaProportion" type="range" min="0.01" max="1" step="0.01" />
             </label>
           </div>
         </form>
@@ -109,7 +109,7 @@
                   <dd id="modified-beta">—</dd>
                 </div>
                 <div>
-                  <dt>γ<sub>new</sub> = γ × proportion</dt>
+                  <dt>γ<sub>new</sub> = 1 / (duration × proportion)</dt>
                   <dd id="modified-gamma">—</dd>
                 </div>
               </dl>

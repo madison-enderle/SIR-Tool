@@ -124,8 +124,8 @@ function validateInputs(values) {
     errors.push('Infection-rate proportion must be between 0 and 1.');
   }
 
-  if (!Number.isFinite(values.gammaProportion) || values.gammaProportion < 0 || values.gammaProportion > 1) {
-    errors.push('Recovery-rate proportion must be between 0 and 1.');
+  if (!Number.isFinite(values.gammaProportion) || values.gammaProportion <= 0 || values.gammaProportion > 1) {
+    errors.push('Recovery-rate proportion must be greater than 0 and no more than 1.');
   }
 
   return errors;
@@ -153,7 +153,7 @@ function updateDerivedValues(values) {
   const s0 = values.population - values.initialInfected - values.initialRecovered;
   const gamma = 1 / values.duration;
   const modifiedBeta = values.beta * values.betaProportion;
-  const modifiedGamma = gamma * values.gammaProportion;
+  const modifiedGamma = 1 / (values.duration * values.gammaProportion);
 
   displayElements.baselineS0.textContent = formatNumber(s0, 2);
   displayElements.baselineBeta.textContent = formatNumber(values.beta, 4);
@@ -392,7 +392,7 @@ function render() {
 
   const gamma = 1 / values.duration;
   const modifiedBeta = values.beta * values.betaProportion;
-  const modifiedGamma = gamma * values.gammaProportion;
+  const modifiedGamma = 1 / (values.duration * values.gammaProportion);
 
   const baselinePoints = simulateSir({
     population: values.population,
