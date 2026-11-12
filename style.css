@@ -1,0 +1,251 @@
+:root {
+  color-scheme: light;
+  --bg: #f3f6fb;
+  --surface: #ffffff;
+  --surface-alt: #f8fafc;
+  --text: #1f2937;
+  --muted: #5b6472;
+  --border: #d7deea;
+  --accent: #1d4ed8;
+  --danger-bg: #fef2f2;
+  --danger-border: #fecaca;
+  --danger-text: #b91c1c;
+  --shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, #eef3fb 0%, var(--bg) 100%);
+}
+
+.page {
+  width: min(1200px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.5rem 0 2.5rem;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 2.8vw, 2.5rem);
+}
+
+.subtitle {
+  margin: 0.4rem 0 0;
+  color: var(--muted);
+  max-width: 60ch;
+  line-height: 1.5;
+}
+
+.controls-card,
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.controls-card {
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.controls-card h2,
+.chart-card h2,
+.derived-values h3,
+.derived-card h4 {
+  margin-top: 0;
+}
+
+.controls-grid,
+.slider-grid,
+.derived-grid,
+.summary-grid,
+.charts-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.controls-grid {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.slider-grid,
+.derived-grid,
+.charts-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-size: 0.95rem;
+}
+
+.field span {
+  font-weight: 600;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font: inherit;
+  color: inherit;
+  background: #fff;
+}
+
+input[type="number"]:focus,
+input[type="range"]:focus {
+  outline: 2px solid rgba(29, 78, 216, 0.18);
+  outline-offset: 2px;
+}
+
+.slider-field {
+  padding: 0.9rem 1rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+input[type="range"] {
+  width: 100%;
+  margin: 0;
+}
+
+.derived-values {
+  margin-top: 1.25rem;
+}
+
+.derived-card {
+  padding: 1rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.derived-card dl,
+.summary-card dl {
+  margin: 0;
+}
+
+.derived-card dl div,
+.summary-card dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(215, 222, 234, 0.8);
+}
+
+.derived-card dl div:last-child,
+.summary-card dl div:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.derived-card dt,
+.summary-card dt {
+  color: var(--muted);
+}
+
+.derived-card dd,
+.summary-card dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.validation-message {
+  min-height: 1.25rem;
+  margin-top: 1rem;
+  padding: 0;
+  border-radius: 10px;
+  color: transparent;
+}
+
+.validation-message.visible {
+  padding: 0.85rem 1rem;
+  color: var(--danger-text);
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-border);
+}
+
+.chart-card {
+  padding: 1rem;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.chart-wrap {
+  position: relative;
+  height: 360px;
+}
+
+.summary-grid {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  margin-top: 1rem;
+}
+
+.summary-card {
+  padding: 0.9rem 1rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.summary-card h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1rem;
+}
+
+.secondary-button {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.secondary-button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@media (max-width: 720px) {
+  .page {
+    width: min(100% - 1rem, 1200px);
+    padding-top: 1rem;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .chart-wrap {
+    height: 300px;
+  }
+}
